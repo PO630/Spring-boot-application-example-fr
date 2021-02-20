@@ -8,4 +8,9 @@ public interface UserService {
 
     Optional<User> findById(Integer id);
 
+    Iterable<User> findAll();
+
+    void save( User user ) ;
+
+
 }

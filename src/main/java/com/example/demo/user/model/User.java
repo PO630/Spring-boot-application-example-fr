@@ -1,5 +1,8 @@
 package com.example.demo.user.model;
 
+import com.example.demo.user.view.UserView;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,21 +16,27 @@ public class User {
     @Id
     @Column(name="id_user")
     @GeneratedValue
+    @JsonView(UserView.UserViewPublic.class)
     private Integer id;
 
     @Column(name="name_user")
+    @JsonView(UserView.UserViewPublic.class)
     private String name;
 
     @Column(name="password_user")
+    @JsonView(UserView.UserViewPrivate.class)
     private String password;
 
     @Column(name="email_user")
+    @JsonView(UserView.UserViewPrivate.class)
     private String email;
 
     @Column(name="avatar_user")
+    @JsonView(UserView.UserViewPublic.class)
     private String avatar;
 
     @Column(name="ban_user")
+    @JsonView(UserView.UserViewPublic.class)
     private Integer ban;
 
     public User() {

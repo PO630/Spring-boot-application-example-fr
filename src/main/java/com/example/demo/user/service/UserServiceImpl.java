@@ -20,4 +20,17 @@ public class UserServiceImpl implements com.example.demo.user.service.UserServic
 
     }
 
+    @Override
+    public Iterable<User> findAll()
+    {
+        return userRepository.findAll() ;
+    }
+
+    @Override
+    public void save( User user )
+    {
+        userRepository.save( user ) ;
+    }
+
+
 }
