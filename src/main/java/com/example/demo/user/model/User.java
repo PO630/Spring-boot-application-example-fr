@@ -3,24 +3,22 @@ package com.example.demo.user.model;
 import com.example.demo.user.view.UserView;
 import com.fasterxml.jackson.annotation.JsonView;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name="user")
-public class User {
+public class User implements Serializable {
 
     @Id
     @Column(name="id_user")
     @GeneratedValue
-    @JsonView(UserView.UserViewPublic.class)
+    @JsonView( { UserView.UserViewPublic.class , UserView.UserViewSimple.class } )
     private Integer id;
 
     @Column(name="name_user")
-    @JsonView(UserView.UserViewPublic.class)
+    @JsonView( { UserView.UserViewPublic.class , UserView.UserViewSimple.class } )
     private String name;
 
     @Column(name="password_user")
@@ -32,12 +30,16 @@ public class User {
     private String email;
 
     @Column(name="avatar_user")
-    @JsonView(UserView.UserViewPublic.class)
+    @JsonView( { UserView.UserViewPublic.class , UserView.UserViewSimple.class } )
     private String avatar;
 
     @Column(name="ban_user")
-    @JsonView(UserView.UserViewPublic.class)
+    @JsonView( { UserView.UserViewPublic.class , UserView.UserViewSimple.class } )
     private Integer ban;
+
+    @OneToMany(mappedBy="user")
+    @JsonView( UserView.UserViewPublic.class )
+    private Set<UserFollow> userFollows;
 
     public User() {
         super();
